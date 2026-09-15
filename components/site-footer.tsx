@@ -3,12 +3,14 @@ import { ArrowUp } from "lucide-react";
 import { profile } from "@/data/profile";
 
 export function SiteFooter() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer>
-      <p>{profile.name}</p>
-      <p>{profile.title}<br />{profile.location}</p>
-      <p>© {new Date().getFullYear()}<br />Built with intent.</p>
-      <Link href="#top">Back to top <ArrowUp /></Link>
+    <footer className="site-footer">
+      <p className="footer-identity"><strong>{profile.name}</strong><span>{profile.title}</span></p>
+      <p>{profile.location}</p>
+      <p>© {currentYear}</p>
+      <Link href="#top">Back to top <ArrowUp aria-hidden="true" /></Link>
     </footer>
   );
 }

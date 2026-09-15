@@ -6,12 +6,25 @@ import { profile } from "@/data/profile";
 export function ContactSection() {
   return (
     <section id="contact" className="contact-section" aria-labelledby="contact-title">
-      <div className="contact-top"><span>05 / Contact</span><span>Morocco — Open internationally</span></div>
-      <Reveal><h2 id="contact-title">Building something<br /><span>that needs to</span><br />hold up?</h2></Reveal>
-      <div className="contact-bottom">
-        <p>Internships, PFE, and<br />engineering opportunities.</p>
-        {profile.email ? <a className="talk-cta" href={`mailto:${profile.email}`}>Let&apos;s talk <ArrowUpRight /></a> : <span className="talk-cta talk-cta-disabled" title="Add an email in data/profile.ts">Let&apos;s talk <small>Email TODO</small></span>}
+      <div className="contact-heading">
+        <p><span>05 /</span> Contact</p>
+        <p className="contact-availability"><i aria-hidden="true" />{profile.contactAvailability}</p>
       </div>
+
+      <Reveal className="contact-statement">
+        <h2 id="contact-title"><span>Have an</span><span>opportunity</span><span>in mind?</span></h2>
+      </Reveal>
+
+      {profile.email && (
+        <Reveal className="contact-email">
+          <span>Email</span>
+          <a href={`mailto:${profile.email}`} aria-label={`Email Mohammed at ${profile.email}`}>
+            {profile.email}
+            <ArrowUpRight aria-hidden="true" />
+          </a>
+        </Reveal>
+      )}
+
       <ContactLinks />
     </section>
   );
