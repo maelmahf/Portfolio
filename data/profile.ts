@@ -4,8 +4,8 @@ export const profile = {
   location: "Morocco",
   availability: "Available for internship",
   portrait: "/images/portrait/mohammed-elmahfoudi-portrait-v2.png" as string | null,
-  github: null as string | null, // TODO: add GitHub URL
-  linkedin: null as string | null, // TODO: add LinkedIn URL
-  email: null as string | null, // TODO: add email address
+  github: "https://github.com/maelmahf" as string | null,
+  linkedin: "https://www.linkedin.com/in/maelmahf" as string | null,
+  email: "mohammedelmahfoudi2004@gmail.com" as string | null,
   resume: null as string | null, // TODO: add CV URL or /resume.pdf
 };
