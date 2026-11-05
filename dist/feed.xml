@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mohammed Elmahfoudi | Software Engineer</title>
+    <link>https://maelmahf.dev/</link>
+    <description>Mohammed Elmahfoudi — software engineer building backend systems, APIs, and containerized infrastructure with Python, TypeScript, and C++.</description>
+    <language>en</language>
+    <atom:link href="https://maelmahf.dev/feed.xml" rel="self" type="application/rss+xml" />
+
+  </channel>
+</rss>

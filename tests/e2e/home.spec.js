@@ -1,0 +1,176 @@
+import { test, expect } from '@playwright/test'
+import { url } from './site.js'
+import { pagePath } from '../../src/paths.js'
+import config from '../../site.config.js'
+
+const { identity, links, footer, seo } = config
+const label = (url) =>
+  url.replace(/^https?:\/\/(www\.)?/, '').replace(/^mailto:/, '')
+
+test.describe('the README page', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto(url())
+  })
+
+  // The crumb and the title are deliberately different: one is a repository
+  // breadcrumb, the other is what a search result says.
+  test('titles the tab from seo.title, not from the crumb', async ({
+    page,
+  }) => {
+    await expect(page).toHaveTitle(seo.title)
+  })
+
+  test('the section tabs open dedicated pages and mark the current route', async ({
+    page,
+  }) => {
+    await expect(
+      page.getByRole('button', { name: 'More pages', exact: true })
+    ).toBeHidden()
+    for (const [tab, route, heading] of [
+      [config.soul.title, 'soul', config.soul.title],
+      ['Timeline', 'timeline', 'Timeline'],
+      ['Projects', 'work', 'Projects'],
+      ['Writing', 'writing', 'Writing'],
+      ['Research', 'research', 'Research'],
+      ['Contact', 'more', 'Contact'],
+    ]) {
+      await page.locator('.gh-tabs a', { hasText: tab }).click()
+      await expect(page).toHaveURL(url(pagePath(route)))
+      await expect(page.locator('h1')).toHaveText(heading)
+      await expect(
+        page.locator(`.gh-tabs a[href="${pagePath(route)}"]`)
+      ).toHaveAttribute('aria-current', 'page')
+      await expect(page.locator('.gh-tabs a[aria-current]')).toHaveCount(1)
+      await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0)
+    }
+  })
+
+  test('keeps README selected while scrolling through landing highlights', async ({
+    page,
+  }) => {
+    for (const id of ['work', 'timeline', 'blog', 'research', 'contact']) {
+      await page
+        .locator(`#${id}`)
+        .evaluate((el) => el.scrollIntoView({ behavior: 'instant' }))
+      await expect(page.locator('.gh-tabs a').first()).toHaveAttribute(
+        'aria-current',
+        'page'
+      )
+      await expect(page.locator('.gh-tabs a[aria-current]')).toHaveCount(1)
+      await expect(page).toHaveURL(url())
+    }
+  })
+
+  test('uses the current header height for section jumps after resizing', async ({
+    page,
+  }) => {
+    for (const width of [320, 390, 768, 1440]) {
+      await page.setViewportSize({ width, height: 900 })
+      for (const id of ['work', 'timeline', 'contact']) {
+        await page
+          .locator(`#${id}`)
+          .evaluate((el) => el.scrollIntoView({ behavior: 'instant' }))
+        await expect
+          .poll(async () => {
+            const heading = await page.locator(`#${id} h2`).boundingBox()
+            const header = await page.locator('.gh-header').boundingBox()
+            return heading.y >= header.y + header.height
+          })
+          .toBe(true)
+      }
+    }
+  })
+
+  // The README is the page itself, not a spot on it, so it goes to the root
+  // the way a logo does — and leaves no fragment behind.
+  test('the README tab and the crumb land on the bare site root', async ({
+    page,
+  }) => {
+    for (const home of [
+      page.locator('.gh-tabs a', { hasText: 'README' }),
+      page.locator('.crumb .repo-name'),
+    ]) {
+      await page.goto(url('/#contact'))
+      await home.click()
+      await expect(page).toHaveURL(url())
+      // scroll-behavior is smooth, so this arrives a moment after the url
+      await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0)
+    }
+  })
+
+  test('renders the header crumb from the config', async ({ page }) => {
+    await expect(page.locator('.crumb .avatar')).toHaveText(identity.avatar)
+    await expect(page.locator('.crumb a').first()).toHaveText(identity.handle)
+    await expect(page.locator('.repo-name')).toHaveText(identity.repo)
+  })
+
+  test('renders the hero from the config', async ({ page }) => {
+    await expect(page.locator('h1').first()).toHaveText(identity.name)
+    await expect(page.locator('.hero-sub')).toHaveText(identity.tagline)
+  })
+
+  test('shows the status row only when a status is set', async ({ page }) => {
+    const status = page.locator('.hero-status .status')
+    if (identity.status) {
+      await expect(status).toContainText(identity.status)
+    } else {
+      await expect(status).toHaveCount(0)
+    }
+  })
+
+  test('lists every configured remote in the contact table', async ({
+    page,
+  }) => {
+    await page.goto(url(pagePath('more')))
+    const rows = page.locator('#contact table tr')
+    await expect(rows).toHaveCount(links.length)
+    for (const [i, link] of links.entries()) {
+      const row = rows.nth(i)
+      await expect(row.locator('td').first()).toHaveText(link.name)
+      await expect(row.locator('a')).toHaveAttribute('href', link.url)
+      await expect(row.locator('a')).toHaveText(label(link.url))
+      await expect(row.locator('.kind')).toHaveText(`(${link.kind})`)
+    }
+  })
+
+  test('opens external remotes in a new tab, but not mailto', async ({
+    page,
+  }) => {
+    await page.goto(url(pagePath('more')))
+    for (const link of links) {
+      // scoped to the table: the Email me button is a second mailto anchor
+      const anchor = page.locator(`#contact table a[href="${link.url}"]`)
+      const target = await anchor.getAttribute('target')
+      expect(target, link.name).toBe(
+        link.url.startsWith('mailto:') ? null : '_blank'
+      )
+    }
+  })
+
+  test('renders the footer with the current year', async ({ page }) => {
+    const expected = footer.text.replace('{year}', new Date().getFullYear())
+    await expect(page.locator('footer')).toContainText(expected)
+    await expect(page.locator('footer')).not.toContainText('{year}')
+  })
+
+  test('applies the seo description to the document', async ({ page }) => {
+    const meta = page.locator('meta[name="description"]')
+    await expect(meta).toHaveAttribute('content', config.seo.description)
+  })
+
+  test('loads without console errors or failed requests', async ({ page }) => {
+    const errors = []
+    const failed = []
+    page.on('console', (m) => m.type() === 'error' && errors.push(m.text()))
+    page.on('requestfailed', (r) => failed.push(r.url()))
+    await page.reload()
+    await page.waitForLoadState('networkidle')
+    expect(errors).toEqual([])
+    expect(failed).toEqual([])
+  })
+
+  test('never shows the content warning banner', async ({ page }) => {
+    // The banner means a markdown file failed to parse.
+    await expect(page.locator('.tl-problems')).toHaveCount(0)
+  })
+})

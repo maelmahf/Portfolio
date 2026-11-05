@@ -1,0 +1,275 @@
+# Mohammed Elmahfoudi
+
+> Mohammed Elmahfoudi — software engineer building backend systems, APIs, and containerized infrastructure with Python, TypeScript, and C++.
+
+I build backend systems, production APIs, and containerized infrastructure. From HTTP servers in C++ to full-stack platforms in Python and TypeScript, I enjoy understanding how things work from the ground up.
+
+Currently: now · backend developer @ SHBM INF Platform.
+Based in: Morocco.
+
+## Pages
+
+- [Projects](https://maelmahf.dev/work/): Backend services, an HTTP server built from scratch, and containerized infrastructure.
+- [Timeline](https://maelmahf.dev/timeline/): The full graph: work, education, trainings, startups and speaking. Follow each branch from its first commit to where it merges, or filter by track.
+- [About me](https://maelmahf.dev/soul/): From systems programming to backend services — my path, my projects, and the questions behind them.
+- [Contact](https://maelmahf.dev/more/): Find my code, connect on LinkedIn, or get in touch by email.
+
+## Projects
+
+- [Webserv — HTTP Server from Scratch](https://github.com/maelmahf/Webserv): Built an HTTP/1.1 server in C++98 with a single-threaded, non-blocking poll() event loop. Supports virtual hosts, location-based routing, asynchronous CGI execution, uploads, persistent connections, and HTTP range requests.
+- [Inception — Containerized Infrastructure](https://github.com/maelmahf/inception): Orchestrated NGINX, WordPress, MariaDB, and Redis with Docker Compose. Configured TLS, isolated service networking, and persistent volumes, with Adminer and Portainer for administration.
+- [Minishell — Unix Shell](https://github.com/maelmahf/mini_shel): A shell implementation in C with an execution tree, environment-variable expansion, wildcard expansion, quote handling, heredoc handling, and signal management.
+- [Philosophers — Concurrency Simulation](https://github.com/maelmahf/Philo): A dining philosophers simulation in C exploring threads, shared state, mutex synchronization, meal timing, and monitoring.
+- [Gymbot — Booking Automation](https://github.com/maelmahf/book): A Python automation project that books recurring gym sessions. Includes Docker-based deployment and scheduled execution on Railway.
+- [Cub3D](https://github.com/maelmahf/Cub3D): A C graphics project from the 42 curriculum.
+- [Push_swap](https://github.com/maelmahf/Push_swap): A C sorting project from the 42 curriculum, built around stack operations.
+- [Pipex — Command Pipelines](https://github.com/maelmahf/PIPEX): Recreates command pipelines in C, connecting commands through Unix pipes.
+- [So_long — MiniLibX Game](https://github.com/maelmahf/so_long): A small game written in C using the MiniLibX graphics library.
+- [C++ Modules 00–09](https://github.com/maelmahf/CPP00-09): A collection of C++ curriculum modules and programming exercises.
+- [Libft — C Library](https://github.com/maelmahf/Libft): A personal C library developed as part of the 42 curriculum.
+- [Ft_printf](https://github.com/maelmahf/Printf): A C implementation of formatted output from the 42 curriculum.
+- [Get Next Line](https://github.com/maelmahf/Get-Next-Line): A C utility for reading input one line at a time.
+- Ft_Transcendence — Full-Stack Web Platform: Built a platform with Next.js, FastAPI, PostgreSQL, and Docker. Implemented candidate and recruiter roles, JWT sessions, protected routing, an AI-powered recommendation API, and recruiter offer management with live UI updates.
+- [Sahtek — Web Interface](https://github.com/maelmahf/Sahtek): A web interface with a landing page, login page, and dashboard, built with HTML and supporting assets.
+
+## Profiles
+
+- [origin](mailto:mohammedelmahfoudi2004@gmail.com)
+- [github](https://github.com/maelmahf)
+- [linkedin](https://linkedin.com/in/maelmahf)
+
+# Projects
+
+Backend services, an HTTP server built from scratch, and containerized infrastructure.
+
+## Webserv — HTTP Server from Scratch
+- pinned: true
+- org: 42 Network · team project
+- link: https://github.com/maelmahf/Webserv
+- visibility: Public
+- domains: systems-programming
+- languages: cpp
+- topics: networking, concurrency, parsing
+
+Built an HTTP/1.1 server in C++98 with a single-threaded, non-blocking poll() event loop. Supports virtual hosts, location-based routing, asynchronous CGI execution, uploads, persistent connections, and HTTP range requests.
+
+## Inception — Containerized Infrastructure
+- pinned: true
+- org: 42 Network
+- link: https://github.com/maelmahf/inception
+- visibility: Public
+- domains: infrastructure
+- topics: caching, networking
+
+Orchestrated NGINX, WordPress, MariaDB, and Redis with Docker Compose. Configured TLS, isolated service networking, and persistent volumes, with Adminer and Portainer for administration.
+
+## Minishell — Unix Shell
+- org: 42 Network
+- link: https://github.com/maelmahf/mini_shel
+- visibility: Public
+- domains: systems-programming
+- languages: c
+- topics: parsing, system-calls, memory-management
+
+A shell implementation in C with an execution tree, environment-variable expansion, wildcard expansion, quote handling, heredoc handling, and signal management.
+
+## Philosophers — Concurrency Simulation
+- org: 42 Network
+- link: https://github.com/maelmahf/Philo
+- visibility: Public
+- domains: systems-programming
+- languages: c
+- topics: concurrency
+
+A dining philosophers simulation in C exploring threads, shared state, mutex synchronization, meal timing, and monitoring.
+
+## Gymbot — Booking Automation
+- link: https://github.com/maelmahf/book
+- visibility: Public
+- domains: infrastructure
+- languages: python
+- topics: build-automation
+
+A Python automation project that books recurring gym sessions. Includes Docker-based deployment and scheduled execution on Railway.
+
+## Cub3D
+- org: 42 Network
+- link: https://github.com/maelmahf/Cub3D
+- visibility: Public
+- domains: systems-programming
+- languages: c
+
+A C graphics project from the 42 curriculum.
+
+## Push_swap
+- org: 42 Network
+- link: https://github.com/maelmahf/Push_swap
+- visibility: Public
+- domains: systems-programming
+- languages: c
+- topics: data-structures
+
+A C sorting project from the 42 curriculum, built around stack operations.
+
+## Pipex — Command Pipelines
+- org: 42 Network
+- link: https://github.com/maelmahf/PIPEX
+- visibility: Public
+- domains: systems-programming
+- languages: c
+- topics: system-calls
+
+Recreates command pipelines in C, connecting commands through Unix pipes.
+
+## So_long — MiniLibX Game
+- org: 42 Network
+- link: https://github.com/maelmahf/so_long
+- visibility: Public
+- domains: systems-programming
+- languages: c
+
+A small game written in C using the MiniLibX graphics library.
+
+## C++ Modules 00–09
+- org: 42 Network
+- link: https://github.com/maelmahf/CPP00-09
+- visibility: Public
+- domains: systems-programming
+- languages: cpp
+
+A collection of C++ curriculum modules and programming exercises.
+
+## Libft — C Library
+- org: 42 Network
+- link: https://github.com/maelmahf/Libft
+- visibility: Public
+- domains: systems-programming
+- languages: c
+- topics: memory-management
+
+A personal C library developed as part of the 42 curriculum.
+
+## Ft_printf
+- org: 42 Network
+- link: https://github.com/maelmahf/Printf
+- visibility: Public
+- domains: systems-programming
+- languages: c
+- topics: parsing
+
+A C implementation of formatted output from the 42 curriculum.
+
+## Get Next Line
+- org: 42 Network
+- link: https://github.com/maelmahf/Get-Next-Line
+- visibility: Public
+- domains: systems-programming
+- languages: c
+- topics: memory-management
+
+A C utility for reading input one line at a time.
+
+## Ft_Transcendence — Full-Stack Web Platform
+- pinned: true
+- org: 42 Network
+
+Built a platform with Next.js, FastAPI, PostgreSQL, and Docker. Implemented candidate and recruiter roles, JWT sessions, protected routing, an AI-powered recommendation API, and recruiter offer management with live UI updates.
+
+
+## Sahtek — Web Interface
+- link: https://github.com/maelmahf/Sahtek
+- visibility: Public
+- domains: web-development
+
+A web interface with a landing page, login page, and dashboard, built with HTML and supporting assets.
+
+# About me
+
+From systems programming to backend services — my path, my projects, and the questions behind them.
+
+I'm **Mohammed Elmahfoudi**, a software engineer based in Morocco. I build backend services, explore systems programming, and connect the two through projects that take me from memory and sockets to APIs and infrastructure.
+
+I like understanding what happens behind an abstraction. Writing an HTTP server in C++ makes a request feel different when you later handle it in Next.js. Building a shell makes processes, pipes, and signals more than concepts in a textbook. That connection between the foundations and the finished product shapes the way I learn and build.
+
+## From the foundations up
+
+My path started with a DUT in Computer Science at Ecole Supérieure de Technologie in Kénitra. I continued at **1337 Coding School, part of the 42 Network**, where project-based learning has pushed me to turn ideas into working programs.
+
+Along the way, I've worked on a Unix shell, a concurrent philosophers simulation, an HTTP/1.1 server, and a containerized web infrastructure. Each project asks a different question: how do you manage memory, coordinate shared state, handle several clients, or keep services connected?
+
+I'm also studying data engineering with **ALX Africa**, expanding into ETL, data modelling, and cloud architecture.
+
+## Building for people
+
+On the **SHBM INF Platform at UM6P**, I work on backend services for student and administrative workflows. My work includes REST APIs, JWT-based authentication, role-based access, and database query optimization. It's where implementation details meet practical needs: who can access a resource, how data moves, and how a service responds under load.
+
+My full-stack work includes **Ft_Transcendence**, a platform built with Next.js, FastAPI, PostgreSQL, and Docker, with candidate and recruiter roles, offer management, and an AI-powered recommendation API.
+
+Beyond code, the **UM6P Explorer Program and MIT Sandbox mentorship** gave me experience developing a healthcare accessibility prototype and testing it with more than 20 users. It brought another question into the process: does what we're building solve a problem for the person using it?
+
+## The tools I reach for
+
+For systems work, I use **C and C++**. For backend services and automation, I work with **Python, TypeScript, and JavaScript**, using tools such as FastAPI, NestJS, and Next.js API routes.
+
+I use **PostgreSQL, MySQL, and MongoDB** for data, and **Docker, Linux, NGINX, and GitHub Actions** to configure and run services. When a project needs a frontend, I work with **React, HTML, and CSS**.
+
+The interesting part is how those pieces fit together: a clear API, a useful data model, and infrastructure that supports the application.
+
+## Let's connect
+
+If you're building backend services, working on infrastructure, or have a project where my background could help, I'd be happy to talk.
+
+[Email me](mailto:mohammedelmahfoudi2004@gmail.com) · [Explore my GitHub](https://github.com/maelmahf) · [Connect on LinkedIn](https://linkedin.com/in/maelmahf)
+
+# Career
+
+## work
+
+### Backend Developer
+- highlight: true
+- org: SHBM INF Platform — UM6P
+- start: 2025-01
+- end: now
+- topics: Next.js, Node.js, REST APIs, RBAC, PostgreSQL
+
+Built RESTful API services for student and administrative workflows. Implemented JWT-based role access across student, faculty, and admin roles, and optimized database queries and API response times.
+
+## education
+
+### Software Engineering Program
+- highlight: true
+- org: 1337 Coding School — 42 Network
+- start: 2024
+- end: now
+
+Advancing through a project-based software engineering program, with work in systems programming, backend development, and infrastructure.
+
+### DUT in Computer Science
+- highlight: true
+- org: Ecole Supérieure de Technologie, Kénitra
+- start: 2022
+- end: 2024
+
+Computer science studies.
+
+## trainings
+
+### Data Engineering Program
+- highlight: true
+- org: ALX Africa
+- start: 2025
+- end: now
+- topics: ETL, data modelling, cloud architecture
+
+Remote program covering data engineering workflows.
+
+## entrepreneurship
+
+### Entrepreneurship Intern
+- highlight: true
+- org: UM6P Explorer Program — MIT Sandbox
+- start: 2025-06
+- end: 2025-09
+- topics: Product development, market validation, Agile
+
+Validated a healthcare accessibility prototype with over 20 users and delivered an MVP under UM6P and MIT Sandbox mentorship in Benguerir.

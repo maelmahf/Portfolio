@@ -1,0 +1,251 @@
+import { describe, it, expect } from 'vitest'
+import { existsSync, readFileSync } from 'node:fs'
+import { parsePost, postMeta } from '../../src/blog/parse.js'
+import { POSTS, loadBody } from '../../src/blog/index.js'
+import { imageSize } from '../../plugins/imageSizes.js'
+
+const withFm = (fm, body = 'Body text.\n') => `---\n${fm}\n---\n${body}`
+
+describe('parsePost', () => {
+  it('takes the slug from the filename, not the frontmatter', () => {
+    const p = parsePost('../content/blog/my-post.md', withFm('title: Whatever'))
+    expect(p.slug).toBe('my-post')
+  })
+
+  it('reads the frontmatter fields', () => {
+    const p = parsePost(
+      'x/a.md',
+      withFm(
+        'title: Hello\ndate: 2024-05-01\nsummary: A line\ntopics: one, two'
+      )
+    )
+    expect(p.title).toBe('Hello')
+    expect(p.date).toBe('2024-05-01')
+    expect(p.summary).toBe('A line')
+    expect(p.topics).toEqual(['one', 'two'])
+  })
+
+  it('lowercases field names and trims values', () => {
+    const p = parsePost(
+      'x/a.md',
+      withFm('Title:   Spaced   \nDATE: 2024-01-01')
+    )
+    expect(p.title).toBe('Spaced')
+    expect(p.date).toBe('2024-01-01')
+  })
+
+  it('strips the frontmatter from the body', () => {
+    const p = parsePost('x/a.md', withFm('title: T', '# Heading\n\nProse.\n'))
+    expect(p.body).toBe('# Heading\n\nProse.\n')
+    expect(p.body).not.toContain('title:')
+  })
+
+  it('drops leading authoring comments from the body', () => {
+    const p = parsePost(
+      'x/a.md',
+      withFm('title: T', '<!-- note to self -->\n\nReal text.\n')
+    )
+    expect(p.body.trimStart()).toBe('Real text.\n')
+  })
+
+  it('falls back to the slug when there is no title', () => {
+    expect(parsePost('x/untitled-post.md', 'Just a body.').title).toBe(
+      'untitled-post'
+    )
+  })
+
+  it('survives a file with no frontmatter at all', () => {
+    const p = parsePost('x/a.md', 'Just a body.\n')
+    expect(p.body).toBe('Just a body.\n')
+    expect(p.date).toBe('')
+    expect(p.topics).toEqual([])
+    expect(p.draft).toBe(false)
+  })
+
+  it('reads draft: true in any case', () => {
+    expect(parsePost('x/a.md', withFm('draft: true')).draft).toBe(true)
+    expect(parsePost('x/a.md', withFm('draft: TRUE')).draft).toBe(true)
+    expect(parsePost('x/a.md', withFm('draft: false')).draft).toBe(false)
+    expect(parsePost('x/a.md', withFm('title: T')).draft).toBe(false)
+  })
+
+  it('ignores empty topics and stray separators', () => {
+    expect(parsePost('x/a.md', withFm('topics: a, , b,')).topics).toEqual([
+      'a',
+      'b',
+    ])
+  })
+})
+
+describe.each(['date', 'updated'])('%s validation', (field) => {
+  it.each([
+    '2026-13-01',
+    '2026-00-01',
+    '2026-01-00',
+    '2026-02-30',
+    '2026-04-31',
+    '2025-02-29',
+    '1900-02-29',
+    '2026-1-02',
+    'yesterday',
+  ])('rejects %s with the source file and field in the error', (value) => {
+    const raw = withFm(`${field}: ${value}`)
+    for (const parse of [parsePost, postMeta]) {
+      expect(() => parse('content/blog/broken.md', raw)).toThrow(
+        `content/blog/broken.md: invalid ${field} "${value}"`
+      )
+    }
+  })
+
+  it.each(['2024-02-29', '2000-02-29', '2026-02-28', '2026-12-31'])(
+    'preserves the valid calendar date %s',
+    (value) => {
+      expect(parsePost('x/a.md', withFm(`${field}: ${value}`))[field]).toBe(
+        value
+      )
+    }
+  )
+})
+
+// [slug, alt, src] for every image embedded in a shipped post.
+async function images() {
+  const out = []
+  for (const p of POSTS) {
+    const body = await loadBody(p.slug)
+    for (const [, alt, src] of body.matchAll(/!\[([^\]\n]*)\]\(([^)\s]+)/g)) {
+      out.push([p.slug, alt, src])
+    }
+  }
+  return out
+}
+
+describe('shipped posts', () => {
+  it('has at least one', () => {
+    expect(POSTS.length).toBeGreaterThan(0)
+  })
+
+  it('never ships a draft', () => {
+    for (const p of POSTS) expect(p.draft, p.slug).toBe(false)
+  })
+
+  it('has unique slugs, since the slug is the url', () => {
+    const slugs = POSTS.map((p) => p.slug)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+
+  it('is sorted newest first', () => {
+    const dates = POSTS.map((p) => p.date)
+    expect(dates).toEqual([...dates].sort().reverse())
+  })
+
+  it('gives every post a title and a date', () => {
+    for (const p of POSTS) {
+      expect(p.title, p.slug).toBeTruthy()
+      expect(p.date, p.slug).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+    }
+  })
+
+  // The index is built by plugins/blogMeta.js and the bodies are fetched
+  // separately, so "the list has an entry" and "the post has words in it"
+  // are now two different claims. Check both.
+  it('keeps the bodies out of the index', () => {
+    for (const p of POSTS) expect(p, p.slug).not.toHaveProperty('body')
+  })
+
+  it('can load a body for every post in the index', async () => {
+    for (const p of POSTS) {
+      const body = await loadBody(p.slug)
+      expect(body.trim(), p.slug).not.toBe('')
+      expect(body, p.slug).not.toContain('title:')
+    }
+  })
+
+  it('rejects for a slug that is not a post', async () => {
+    await expect(loadBody('no-such-post')).rejects.toThrow(/no-such-post/)
+  })
+
+  // An image with no alt is invisible to a screen reader and to image
+  // search, and nothing else in the build would ever complain about it.
+  it('describes every image it embeds', async () => {
+    for (const [slug, alt, src] of await images()) {
+      expect(alt.trim(), `${slug} -> ${src}`).not.toBe('')
+    }
+  })
+
+  // Post bodies are markdown, so a path that points at nothing is a broken
+  // picture on the live site and silence everywhere else.
+  it('embeds only images that are really in public/', async () => {
+    for (const [slug, , src] of await images()) {
+      const file = `public/${src.replace(/^\.\//, '')}`
+      expect(existsSync(file), `${slug} -> ${src}`).toBe(true)
+      // A size the header parser cannot read means no reserved box, and the
+      // page reflows around the picture as it lands.
+      expect(imageSize(readFileSync(file)), `${slug} -> ${src}`).not.toBeNull()
+    }
+  })
+})
+
+describe('updated', () => {
+  it('reads the last edit from the frontmatter', () => {
+    const p = parsePost('x/a.md', withFm('title: T\nupdated: 2025-01-02'))
+    expect(p.updated).toBe('2025-01-02')
+  })
+
+  it('is empty for a post never edited since it went out', () => {
+    expect(parsePost('x/a.md', withFm('title: T')).updated).toBe('')
+  })
+})
+
+describe('image', () => {
+  it('is the first picture in the body', () => {
+    const p = parsePost(
+      'x/a.md',
+      withFm(
+        'title: T',
+        'Text.\n\n![one](./blog/a/01.webp)\n\n![two](./blog/a/02.webp)\n'
+      )
+    )
+    expect(p.image).toBe('./blog/a/01.webp')
+  })
+
+  it('is null for a post with no pictures', () => {
+    expect(parsePost('x/a.md', withFm('title: T')).image).toBeNull()
+  })
+
+  it('survives into the index, which has no body', () => {
+    const raw = withFm('title: T', '![alt](./blog/a/01.webp)\n')
+    expect(postMeta('x/a.md', raw).image).toBe('./blog/a/01.webp')
+  })
+})
+
+describe('postMeta', () => {
+  it('estimates reading time without shipping the body in the index', () => {
+    const meta = postMeta('x/a.md', withFm('title: T', 'word '.repeat(201)))
+    expect(meta.readingMinutes).toBe(2)
+    expect(meta).not.toHaveProperty('body')
+  })
+
+  it('does not count images or author notes toward reading time', () => {
+    const body =
+      'word '.repeat(200) +
+      `\n![${'alt '.repeat(200)}](https://example.com/photo.png)\n` +
+      `<!-- ${'note '.repeat(200)} -->`
+    expect(postMeta('x/a.md', withFm('title: T', body)).readingMinutes).toBe(1)
+  })
+
+  it('shows at least a one minute read for a short post', () => {
+    expect(postMeta('x/a.md', withFm('title: T', '')).readingMinutes).toBe(1)
+  })
+
+  it('is parsePost without the body', () => {
+    const raw = withFm('title: T\ndate: 2024-01-01', '# Heading\n')
+    const full = parsePost('x/a.md', raw)
+    const meta = postMeta('x/a.md', raw)
+    expect(meta).not.toHaveProperty('body')
+    expect(meta).toEqual(
+      Object.fromEntries(Object.entries(full).filter(([k]) => k !== 'body'))
+    )
+    expect(meta.title).toBe('T')
+    expect(meta.date).toBe('2024-01-01')
+  })
+})

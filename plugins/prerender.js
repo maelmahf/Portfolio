@@ -1,0 +1,142 @@
+// Gives every route a real html file with its own head.
+//
+// The app is one bundle that renders both routes, so without this the build
+// emits a single index.html and every post shares the site's title, the site's
+// description and the site's canonical url until scripts run. Crawlers and
+// link unfurlers frequently do not get that far.
+//
+// So: the seo block in index.html is written from site.config.js rather than
+// kept in step by hand, and after the build each post gets a copy of that html
+// with the block swapped for its own. Same bundle, same assets, one small file
+// per post — and a url that answers 200 with the right <title> before a line
+// of javascript has run.
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { dirname, join } from 'node:path'
+import { isOpenGraph, jsonLd, tagsFor } from '../src/seo/meta.js'
+import { BASE, absolute, feedPath, postPath, pagePath } from '../src/paths.js'
+import { PAGES } from '../src/pages.js'
+import { pageMarkdown } from './pageSnapshot.js'
+import { profile } from './llmsFiles.js'
+import { postMarkdown, readPosts } from './posts.js'
+import { withSnapshot } from './snapshot.js'
+
+// The placeholder in index.html, and the fence the post pages cut along.
+const MARKER = '<!--seo-->'
+const START = '<!--seo:start-->'
+const END = '<!--seo:end-->'
+const BLOCK = new RegExp(`${START}[\\s\\S]*?${END}`)
+
+const esc = (s) =>
+  String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+
+/** The whole head block for one route, fenced so it can be replaced later. */
+function head(post, page = null, indent = '    ') {
+  const rows = tagsFor(post, page)
+    .filter(([, , value]) => value)
+    .map(([kind, key, value]) => {
+      if (kind === 'title') return `<title>${esc(value)}</title>`
+      if (kind === 'link') return `<link rel="${key}" href="${esc(value)}" />`
+      if (kind === 'alternate')
+        return `<link rel="alternate" type="${key}" href="${esc(value)}" />`
+      const attr = isOpenGraph(key) ? 'property' : 'name'
+      return `<meta ${attr}="${key}" content="${esc(value)}" />`
+    })
+
+  // Feed autodiscovery: what a reader looks for when someone pastes the site
+  // url into it. The same on every route, so it is written here rather than
+  // kept in step by the runtime.
+  const feed = absolute(feedPath())
+  if (feed) {
+    rows.push(
+      `<link rel="alternate" type="application/rss+xml" href="${esc(feed)}" />`
+    )
+  }
+
+  const ld = jsonLd(post, page)
+  if (ld) {
+    // A literal "</script>" inside the json would close the tag early.
+    const json = JSON.stringify(ld).replace(/</g, '\\u003c')
+    rows.push(`<script type="application/ld+json">${json}</script>`)
+  }
+
+  return [START, ...rows, END].join(`\n${indent}`)
+}
+
+export default function prerender({
+  blogDir = 'content/blog',
+  timelineDir = 'content/timeline',
+} = {}) {
+  let outDir = 'dist'
+
+  return {
+    name: 'landing-graph:prerender',
+
+    configResolved(resolved) {
+      outDir = resolved.build.outDir
+    },
+
+    // Dev and build both get the generated block, so what you see locally is
+    // what ships.
+    transformIndexHtml(html) {
+      return html.includes(MARKER) ? html.replace(MARKER, head(null)) : html
+    },
+
+    // After Vite has written index.html, so the copies carry the real hashed
+    // asset urls rather than a guess at them.
+    writeBundle() {
+      const index = join(outDir, 'index.html')
+      const html = readFileSync(index, 'utf8')
+
+      if (!BLOCK.test(html)) {
+        this.warn(
+          `index.html has no ${MARKER} placeholder — post pages will share the site's head`
+        )
+      }
+
+      const posts = readPosts(blogDir, { body: true })
+
+      // The README gets the whole profile — bio, posts, research, the
+      // timeline — as text a crawler can read without running the app.
+      writeFileSync(index, withSnapshot(html, profile(posts, timelineDir)))
+
+      for (const page of Object.keys(PAGES)) {
+        const directory = join(outDir, pagePath(page).slice(BASE.length))
+        mkdirSync(directory, { recursive: true })
+        const markdown = pageMarkdown(page, posts, timelineDir)
+        writeFileSync(
+          join(directory, 'index.html'),
+          withSnapshot(html.replace(BLOCK, head(null, page)), markdown)
+        )
+        writeFileSync(join(directory, 'index.md'), markdown)
+      }
+
+      for (const post of posts) {
+        // postPath is base-prefixed ('/landing-graph/blog/x/'); on disk the
+        // base IS the output directory, so only what follows it is a path.
+        const file = join(
+          outDir,
+          postPath(post.slug).slice(BASE.length),
+          'index.html'
+        )
+        mkdirSync(dirname(file), { recursive: true })
+        writeFileSync(
+          file,
+          withSnapshot(html.replace(BLOCK, head(post)), postMarkdown(post))
+        )
+        // Beside it, the post as plain markdown: the text itself, for AI
+        // tools and readers that never run the script that draws the page.
+        writeFileSync(join(dirname(file), 'index.md'), postMarkdown(post))
+      }
+
+      // GitHub Pages serves this for anything that is not a file. No text
+      // copy: nothing real lives at these urls. Every real
+      // route above is, so it is reached only by urls that genuinely are not
+      // here — and the app falls back to the README.
+      writeFileSync(join(outDir, '404.html'), html)
+    },
+  }
+}

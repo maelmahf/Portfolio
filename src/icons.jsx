@@ -1,0 +1,151 @@
+// Minimal 16px octicon-style glyphs, stroke-drawn so they inherit currentColor.
+const base = {
+  width: 16,
+  height: 16,
+  viewBox: '0 0 16 16',
+  fill: 'none',
+  stroke: 'currentColor',
+  strokeWidth: 1.5,
+  strokeLinecap: 'round',
+  strokeLinejoin: 'round',
+  'aria-hidden': true,
+}
+
+export const IconInfo = (p) => (
+  <svg {...base} {...p}>
+    <circle cx="8" cy="8" r="6.25" />
+    <path d="M8 7.25v4" />
+    <path d="M8 4.75v.5" />
+  </svg>
+)
+
+export const IconRepo = (p) => (
+  <svg {...base} {...p}>
+    <path d="M4.75 1.75h7.5v12.5h-6a1.5 1.5 0 0 1 0-3h6" />
+    <path d="M4.75 1.75a1.5 1.5 0 0 0-1.5 1.5v9.25" />
+    <path
+      d="M6.5 14.25v-2.5l1.25.9 1.25-.9v2.5"
+      fill="currentColor"
+      stroke="none"
+      opacity=".85"
+    />
+  </svg>
+)
+
+export const IconBranch = (p) => (
+  <svg {...base} {...p}>
+    <circle cx="4.5" cy="3.25" r="1.6" />
+    <circle cx="4.5" cy="12.75" r="1.6" />
+    <circle cx="11.5" cy="3.25" r="1.6" />
+    <path d="M4.5 4.85v6.3" />
+    <path d="M11.5 4.85v1.4a3 3 0 0 1-3 3h-1.5" />
+  </svg>
+)
+
+export const IconFork = (p) => (
+  <svg {...base} {...p}>
+    <circle cx="4.25" cy="3.25" r="1.6" />
+    <circle cx="11.75" cy="3.25" r="1.6" />
+    <circle cx="8" cy="12.75" r="1.6" />
+    <path d="M4.25 4.85v.9a1.5 1.5 0 0 0 1.5 1.5h4.5a1.5 1.5 0 0 0 1.5-1.5v-.9" />
+    <path d="M8 7.25v3.9" />
+  </svg>
+)
+
+export const IconLinkedIn = (p) => (
+  <svg {...base} {...p}>
+    <rect x="1.5" y="1.5" width="13" height="13" rx="1.5" />
+    <circle cx="4.75" cy="4.75" r=".75" fill="currentColor" stroke="none" />
+    <path d="M4.75 7v4.75M7.75 7v4.75M7.75 9a2 2 0 0 1 4 0v2.75" />
+  </svg>
+)
+
+export const IconMerge = (p) => (
+  <svg {...base} {...p}>
+    <circle cx="4.5" cy="3.25" r="1.6" />
+    <circle cx="4.5" cy="12.75" r="1.6" />
+    <circle cx="11.75" cy="10.5" r="1.6" />
+    <path d="M4.5 4.85v6.3" />
+    <path d="M4.5 6c3.2 0 5.6 1.9 5.6 4.5" />
+  </svg>
+)
+
+export const IconIssueOpen = (p) => (
+  <svg {...base} {...p}>
+    <circle cx="8" cy="8" r="6" />
+    <circle cx="8" cy="8" r="1.6" fill="currentColor" stroke="none" />
+  </svg>
+)
+
+export const IconClosed = (p) => (
+  <svg {...base} {...p}>
+    <circle cx="8" cy="8" r="6" />
+    <path d="m5.7 10.3 4.6-4.6" />
+  </svg>
+)
+
+export const IconTag = (p) => (
+  <svg {...base} {...p}>
+    <path d="M2 7.1V3a1 1 0 0 1 1-1h4.1a1 1 0 0 1 .7.3l6 6a1 1 0 0 1 0 1.4l-4.1 4.1a1 1 0 0 1-1.4 0l-6-6a1 1 0 0 1-.3-.7Z" />
+    <circle cx="5.4" cy="5.4" r="1" fill="currentColor" stroke="none" />
+  </svg>
+)
+
+export const IconGlobe = (p) => (
+  <svg {...base} {...p}>
+    <circle cx="8" cy="8" r="6.25" />
+    <ellipse cx="8" cy="8" rx="2.75" ry="6.25" />
+    <path d="M1.75 8h12.5" />
+  </svg>
+)
+
+export const IconMail = (p) => (
+  <svg {...base} {...p}>
+    <rect x="1.75" y="3.25" width="12.5" height="9.5" rx="1.5" />
+    <path d="m2.5 4.5 5.5 4.25L13.5 4.5" />
+  </svg>
+)
+
+export const IconPencil = (p) => (
+  <svg {...base} {...p}>
+    <path d="M11.1 2.1a1.6 1.6 0 0 1 2.3 0l.5.5a1.6 1.6 0 0 1 0 2.3l-7.6 7.6-3.4 1 1-3.4 7.2-8Z" />
+    <path d="m9.9 3.4 2.7 2.7" />
+  </svg>
+)
+
+export const IconFlask = (p) => (
+  <svg {...base} {...p}>
+    <path d="M6.25 1.75h3.5" />
+    <path d="M6.75 1.75v4.1L2.9 12.4a1.3 1.3 0 0 0 1.1 2h8a1.3 1.3 0 0 0 1.1-2L9.25 5.85v-4.1" />
+    <path d="M4.6 9.75h6.8" />
+  </svg>
+)
+
+export const IconBook = (p) => (
+  <svg {...base} {...p}>
+    <path d="M8 3.5c-1.3-1-3.2-1.4-6-1.4v10.4c2.8 0 4.7.4 6 1.4 1.3-1 3.2-1.4 6-1.4V2.1c-2.8 0-4.7.4-6 1.4Z" />
+    <path d="M8 3.5v10.4" />
+  </svg>
+)
+
+export const IconFingerprint = (p) => (
+  <svg {...base} {...p}>
+    <path d="M2.5 6.5a5.5 5.5 0 0 1 11 0v2" />
+    <path d="M2.5 9.5c0 1.1-.2 2.2-.6 3.2" />
+    <path d="M3.8 13.5c.5-1.4.7-2.9.7-4.5V6.5a3.5 3.5 0 0 1 7 0V9c0 1.8-.3 3.5-.8 5" />
+    <path d="M8 6.5V9c0 1.7-.3 3.3-.9 4.8" />
+  </svg>
+)
+
+export const IconSun = (p) => (
+  <svg {...base} {...p}>
+    <circle cx="8" cy="8" r="2.75" />
+    <path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3.05 3.05l1.06 1.06m7.78 7.78 1.06 1.06M3.05 12.95l1.06-1.06m7.78-7.78 1.06-1.06" />
+  </svg>
+)
+
+export const IconMoon = (p) => (
+  <svg {...base} {...p}>
+    <path d="M14.1 9.2A6.2 6.2 0 0 1 6.8 1.9 6.2 6.2 0 1 0 14.1 9.2Z" />
+  </svg>
+)
