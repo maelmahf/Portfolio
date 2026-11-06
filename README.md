@@ -286,6 +286,19 @@ deploy. The build writes `blog/<slug>/index.html` for every post and a
 `200` and its own `<title>`, and old `#/blog/<slug>` links still land on the
 post.
 
+### Vercel
+
+Use the repository root as the Root Directory and select **Vite** as the
+Framework Preset. The committed `vercel.json` overrides a previous Next.js
+preset and sets the build command to `npm run build` and the output directory
+to `dist`. Node.js is pinned to `24.x` in `package.json`.
+
+After pushing these settings, deploy the latest commit. Redeploying an older
+commit will not include the fix. No Next.js dependency is needed.
+
+Section and blog routes already have their own generated `index.html` files,
+so no catch-all rewrite is required.
+
 ### GitHub Pages
 
 [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) does it for
