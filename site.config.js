@@ -19,7 +19,7 @@ export default {
 
     // The README hero.
     name: 'Mohammed Elmahfoudi',
-    tagline: "I'm a software engineering student at 1337 Coding School, seeking a software engineering internship. I build web applications, APIs, and automation with Python, TypeScript, and JavaScript, supported by a foundation in systems programming.",
+    tagline: "I'm a software engineering student at 1337-UM6P (42 Network) Coding School, seeking a software engineering internship. I build web applications, APIs, and automation with Python, TypeScript, and JavaScript, supported by a foundation in systems programming.",
 
     // What you do, in the words a recruiter would search for. Search engines
     // and AI assistants read it as your job title; it is not shown on the page.
@@ -30,7 +30,7 @@ export default {
     blurb: 'Learning by building — from an idea and a data model to a working application.',
 
     // The green-dot status line. Set status to null to hide the whole row.
-    status: 'now · student at 1337 · seeking a SWE internship',
+    status: 'now · student at 1337-UM6P · seeking a SWE internship',
     location: 'Morocco',
 
     email: 'mohammedelmahfoudi2004@gmail.com',
@@ -85,7 +85,7 @@ export default {
     // and a domain are not among them. Leave it out and the crumb is used.
     title: 'Mohammed Elmahfoudi | Software Engineering Student',
 
-    description: 'Software engineering student at 1337 in Morocco seeking a SWE internship. Projects in full-stack development, APIs, automation, and infrastructure.',
+    description: 'Software engineering student at 1337-UM6P (42 Network) in Morocco seeking a SWE internship. Projects in full-stack development, APIs, automation, and infrastructure.',
 
     // The picture shown when a link is posted to LinkedIn, X or Slack.
     // A path under public/, or a full url. 1200x630 is the safe size.

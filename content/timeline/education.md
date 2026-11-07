@@ -2,7 +2,7 @@
 
 ## Software Engineering Program
 - highlight: true
-- org: 1337 Coding School — 42 Network
+- org: 1337-UM6P Coding School — 42 Network
 - start: 2024
 - end: now
 

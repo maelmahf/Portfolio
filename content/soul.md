@@ -1,4 +1,4 @@
-I'm **Mohammed Elmahfoudi**, a software engineering student at **1337 Coding School, part of the 42 Network**, based in Morocco. I'm currently looking for a **software engineering internship** where I can contribute to real projects, learn from experienced engineers, and grow through feedback.
+I'm **Mohammed Elmahfoudi**, a software engineering student at **1337-UM6P Coding School, part of the 42 Network**, based in Morocco. I'm currently looking for a **software engineering internship** where I can contribute to real projects, learn from experienced engineers, and grow through feedback.
 
 I enjoy building software from end to end: understanding a problem, designing the data model, writing the application, and getting it running. My interests span **backend development, full-stack applications, automation, and infrastructure**. I'm open to SWE opportunities across these areas and keen to learn the tools a team uses.
 
