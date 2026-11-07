@@ -6,7 +6,7 @@ export const PAGES = {
     title: 'Projects',
     file: 'projects.md',
     description:
-      'Backend services, an HTTP server built from scratch, and containerized infrastructure.',
+      'Projects across full-stack applications, APIs, automation, infrastructure, and systems programming.',
   },
   timeline: {
     title: 'Timeline',

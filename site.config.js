@@ -19,18 +19,18 @@ export default {
 
     // The README hero.
     name: 'Mohammed Elmahfoudi',
-    tagline: 'I build backend systems, production APIs, and containerized infrastructure. From HTTP servers in C++ to full-stack platforms in Python and TypeScript, I enjoy understanding how things work from the ground up.',
+    tagline: "I'm a software engineering student at 1337 Coding School, seeking a software engineering internship. I build web applications, APIs, and automation with Python, TypeScript, and JavaScript, supported by a foundation in systems programming.",
 
     // What you do, in the words a recruiter would search for. Search engines
     // and AI assistants read it as your job title; it is not shown on the page.
-    jobTitle: 'Software Engineer',
+    jobTitle: 'Software Engineering Student',
 
     // The pull quote under the tagline. Explains the graph to a first-time
     // reader; rewrite it in your own voice or set it to null to hide it.
-    blurb: 'My journey through systems programming, backend development, and building useful products — one branch at a time.',
+    blurb: 'Learning by building — from an idea and a data model to a working application.',
 
     // The green-dot status line. Set status to null to hide the whole row.
-    status: 'now · backend developer @ SHBM INF Platform',
+    status: 'now · student at 1337 · seeking a SWE internship',
     location: 'Morocco',
 
     email: 'mohammedelmahfoudi2004@gmail.com',
@@ -45,8 +45,8 @@ export default {
   // strings label the page, navigation tab and search/share previews.
   soul: {
     title: 'About me',
-    description: 'From systems programming to backend services — my path, my projects, and the questions behind them.',
-    updated: '2026-11-05',
+    description: 'Software engineering student, hands-on builder, and aspiring SWE intern — my background, projects, and interests.',
+    updated: '2026-11-07',
   },
 
   // ------------------------------------------------------------------- links
@@ -83,9 +83,9 @@ export default {
     // it stays a repository breadcrumb. This is what a search result says,
     // so write the words someone would actually type to find you — a handle
     // and a domain are not among them. Leave it out and the crumb is used.
-    title: 'Mohammed Elmahfoudi | Software Engineer',
+    title: 'Mohammed Elmahfoudi | Software Engineering Student',
 
-    description: 'Mohammed Elmahfoudi — software engineer building backend systems, APIs, and containerized infrastructure with Python, TypeScript, and C++.',
+    description: 'Software engineering student at 1337 in Morocco seeking a SWE internship. Projects in full-stack development, APIs, automation, and infrastructure.',
 
     // The picture shown when a link is posted to LinkedIn, X or Slack.
     // A path under public/, or a full url. 1200x630 is the safe size.
@@ -97,7 +97,7 @@ export default {
 
     // What the share image shows, for people who cannot see it. Leave it out
     // and the title above is used.
-    imageAlt: 'Mohammed Elmahfoudi, software engineer — maelmahf.dev',
+    imageAlt: 'Mohammed Elmahfoudi, software engineering student — maelmahf.dev',
 
     themeColor: '#0d1117',
   },

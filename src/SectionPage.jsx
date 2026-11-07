@@ -17,7 +17,7 @@ import ErrorBoundary from './ErrorBoundary.jsx'
 const Soul = lazy(() => import('./Soul.jsx'))
 
 const facts = {
-  work: [`${PROJECTS.length} projects`, 'public & internal'],
+  work: [`${PROJECTS.length} projects`, 'personal & coursework'],
   timeline: [
     `${ENTRIES.length} entries`,
     `${POINTS.length} milestones`,

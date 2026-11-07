@@ -1,33 +1,36 @@
-I'm **Mohammed Elmahfoudi**, a software engineer based in Morocco. I build backend services, explore systems programming, and connect the two through projects that take me from memory and sockets to APIs and infrastructure.
+I'm **Mohammed Elmahfoudi**, a software engineering student at **1337 Coding School, part of the 42 Network**, based in Morocco. I'm currently looking for a **software engineering internship** where I can contribute to real projects, learn from experienced engineers, and grow through feedback.
 
-I like understanding what happens behind an abstraction. Writing an HTTP server in C++ makes a request feel different when you later handle it in Next.js. Building a shell makes processes, pipes, and signals more than concepts in a textbook. That connection between the foundations and the finished product shapes the way I learn and build.
+I enjoy building software from end to end: understanding a problem, designing the data model, writing the application, and getting it running. My interests span **backend development, full-stack applications, automation, and infrastructure**. I'm open to SWE opportunities across these areas and keen to learn the tools a team uses.
 
-## From the foundations up
+## Learning by building
 
-My path started with a DUT in Computer Science at Ecole Supérieure de Technologie in Kénitra. I continued at **1337 Coding School, part of the 42 Network**, where project-based learning has pushed me to turn ideas into working programs.
+Before joining 1337, I completed a **DUT in Computer Science at Ecole Supérieure de Technologie in Kénitra**. At 1337, project-based learning gives me the chance to work through problems, test my understanding, and improve through collaboration.
 
-Along the way, I've worked on a Unix shell, a concurrent philosophers simulation, an HTTP/1.1 server, and a containerized web infrastructure. Each project asks a different question: how do you manage memory, coordinate shared state, handle several clients, or keep services connected?
+My projects cover several layers of software engineering. I've built web platforms with **Next.js and FastAPI**, worked with **PostgreSQL**, automated tasks with **Python**, and configured services with **Docker**. C and C++ projects have also helped me understand memory, processes, networking, and concurrency — foundations I can carry into other languages and frameworks.
 
-I'm also studying data engineering with **ALX Africa**, expanding into ETL, data modelling, and cloud architecture.
+I'm also studying data engineering with **ALX Africa**, exploring ETL, data modelling, and cloud architecture.
 
-## Building for people
+## Putting it into practice
 
-On the **SHBM INF Platform at UM6P**, I work on backend services for student and administrative workflows. My work includes REST APIs, JWT-based authentication, role-based access, and database query optimization. It's where implementation details meet practical needs: who can access a resource, how data moves, and how a service responds under load.
+On the **SHBM INF Platform at UM6P**, I worked on REST APIs for student and administrative workflows, JWT-based authentication, role-based access, and database query optimization.
 
-My full-stack work includes **Ft_Transcendence**, a platform built with Next.js, FastAPI, PostgreSQL, and Docker, with candidate and recruiter roles, offer management, and an AI-powered recommendation API.
+For **Ft_Transcendence**, I built a full-stack platform using Next.js, FastAPI, PostgreSQL, and Docker. The work included candidate and recruiter roles, offer management, and a recommendation API. It connected frontend interactions with backend logic and data storage.
 
-Beyond code, the **UM6P Explorer Program and MIT Sandbox mentorship** gave me experience developing a healthcare accessibility prototype and testing it with more than 20 users. It brought another question into the process: does what we're building solve a problem for the person using it?
+With **Inception**, I explored the infrastructure behind an application: containerized services, networking, persistent storage, and NGINX. I've also built a Python gym-booking automation project, applying code to a recurring everyday task.
 
-## The tools I reach for
+Through the **UM6P Explorer Program and MIT Sandbox mentorship**, I helped develop a healthcare accessibility prototype and tested it with more than 20 users. That experience brought the focus back to the people using the product and the problem we were trying to solve.
 
-For systems work, I use **C and C++**. For backend services and automation, I work with **Python, TypeScript, and JavaScript**, using tools such as FastAPI, NestJS, and Next.js API routes.
+## My toolkit
 
-I use **PostgreSQL, MySQL, and MongoDB** for data, and **Docker, Linux, NGINX, and GitHub Actions** to configure and run services. When a project needs a frontend, I work with **React, HTML, and CSS**.
+- **Application development:** Python, TypeScript, JavaScript, React, Next.js, FastAPI, and NestJS.
+- **Data:** SQL, PostgreSQL, MySQL, and MongoDB.
+- **Infrastructure and workflow:** Docker, Linux, NGINX, Git, and GitHub Actions.
+- **Programming foundations:** C, C++, data structures, networking, and concurrency.
 
-The interesting part is how those pieces fit together: a clear API, a useful data model, and infrastructure that supports the application.
+I see these as tools to build on. An internship is an opportunity to deepen that knowledge, work with an existing codebase, and learn how a team designs, reviews, tests, and delivers software.
 
-## Let's connect
+## Looking for my next opportunity
 
-If you're building backend services, working on infrastructure, or have a project where my background could help, I'd be happy to talk.
+I'm seeking a **software engineering internship**, with interests in backend, full-stack development, automation, and infrastructure. I'd welcome the chance to discuss where my project experience could be useful and what I could learn from your team.
 
-[Email me](mailto:mohammedelmahfoudi2004@gmail.com) · [Explore my GitHub](https://github.com/maelmahf) · [Connect on LinkedIn](https://linkedin.com/in/maelmahf)
+[Email me](mailto:mohammedelmahfoudi2004@gmail.com) · [Explore my projects on GitHub](https://github.com/maelmahf) · [Connect on LinkedIn](https://linkedin.com/in/maelmahf)

@@ -1,15 +1,10 @@
 # Projects
 
-## Webserv — HTTP Server from Scratch
+## Ft_Transcendence — Full-Stack Web Platform
 - pinned: true
-- org: 42 Network · team project
-- link: https://github.com/maelmahf/Webserv
-- visibility: Public
-- domains: systems-programming
-- languages: cpp
-- topics: networking, concurrency, parsing
+- org: 42 Network
 
-Built an HTTP/1.1 server in C++98 with a single-threaded, non-blocking poll() event loop. Supports virtual hosts, location-based routing, asynchronous CGI execution, uploads, persistent connections, and HTTP range requests.
+Built a platform with Next.js, FastAPI, PostgreSQL, and Docker. Implemented candidate and recruiter roles, JWT sessions, protected routing, an AI-powered recommendation API, and recruiter offer management with live UI updates.
 
 ## Inception — Containerized Infrastructure
 - pinned: true
@@ -20,6 +15,17 @@ Built an HTTP/1.1 server in C++98 with a single-threaded, non-blocking poll() ev
 - topics: caching, networking
 
 Orchestrated NGINX, WordPress, MariaDB, and Redis with Docker Compose. Configured TLS, isolated service networking, and persistent volumes, with Adminer and Portainer for administration.
+
+## Webserv — HTTP Server from Scratch
+- pinned: true
+- org: 42 Network · team project
+- link: https://github.com/maelmahf/Webserv
+- visibility: Public
+- domains: systems-programming
+- languages: cpp
+- topics: networking, concurrency, parsing
+
+Built an HTTP/1.1 server in C++98 with a single-threaded, non-blocking poll() event loop. Supports virtual hosts, location-based routing, asynchronous CGI execution, uploads, persistent connections, and HTTP range requests.
 
 ## Minishell — Unix Shell
 - org: 42 Network
@@ -126,13 +132,6 @@ A C implementation of formatted output from the 42 curriculum.
 - topics: memory-management
 
 A C utility for reading input one line at a time.
-
-## Ft_Transcendence — Full-Stack Web Platform
-- pinned: true
-- org: 42 Network
-
-Built a platform with Next.js, FastAPI, PostgreSQL, and Docker. Implemented candidate and recruiter roles, JWT sessions, protected routing, an AI-powered recommendation API, and recruiter offer management with live UI updates.
-
 
 ## Sahtek — Web Interface
 - link: https://github.com/maelmahf/Sahtek
